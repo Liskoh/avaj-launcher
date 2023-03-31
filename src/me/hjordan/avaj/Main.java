@@ -2,12 +2,14 @@ package me.hjordan.avaj;
 
 import me.hjordan.avaj.objects.AircraftFactory;
 import me.hjordan.avaj.objects.parser.SimulationParser;
+import me.hjordan.avaj.objects.towers.impl.WeatherTower;
 
 import java.io.IOException;
 
 public class Main {
 
-    private static final AircraftFactory FACTORY = new AircraftFactory();
+    public static final AircraftFactory FACTORY = new AircraftFactory();
+    private static final WeatherTower TOWER = new WeatherTower();
 
     public static void main(String[] args) {
 
@@ -19,7 +21,7 @@ public class Main {
         final SimulationParser parser = new SimulationParser(simulationPath);
 
         try {
-            parser.parse();
+            parser.parse(TOWER);
         } catch (IOException e) {
             System.out.println("Error parsing simulation file: " + e.getMessage());
             System.exit(1);

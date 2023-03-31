@@ -1,5 +1,10 @@
 package me.hjordan.avaj.objects.parser;
 
+import me.hjordan.avaj.Main;
+import me.hjordan.avaj.objects.aircrafts.Aircraft;
+import me.hjordan.avaj.objects.aircrafts.Flyable;
+import me.hjordan.avaj.objects.towers.impl.WeatherTower;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -20,7 +25,7 @@ public class SimulationParser {
         this.lines = new ArrayList<>();
     }
 
-    public void parse() throws IOException, NumberFormatException {
+    public void parse(WeatherTower tower) throws IOException, NumberFormatException {
         BufferedReader reader = new BufferedReader(new FileReader(this.simulationPath));
         String line = null;
 
@@ -41,7 +46,18 @@ public class SimulationParser {
             if (split.length != REQUIRED_FIELD_COUNT)
                 throw new IllegalArgumentException("Invalid line format: " + current);
 
+            final String type = split[0];
+            final String name = split[1];
+            final int longitude = Integer.parseInt(split[2]);
+            final int latitude = Integer.parseInt(split[3]);
+            final int height = Integer.parseInt(split[4]);
 
+            final Flyable flyable = Main.FACTORY.newAircraft(type, name, longitude, latitude, height);
+
+            if (flyable == null)
+                throw new IllegalArgumentException("Invalid aircraft type: " + type);
+
+            tower.register(flyable);
         });
 
         reader.close();

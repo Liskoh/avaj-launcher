@@ -1,5 +1,7 @@
 package me.hjordan.avaj.utils;
 
+import me.hjordan.avaj.objects.towers.impl.WeatherTower;
+
 public class Const {
 
     public static final int MIN_SIMULATION_AMOUNT = 1;
@@ -7,4 +9,5 @@ public class Const {
 
     public static final int MAX_HEIGHT = 100;
     public static final int MIN_HEIGHT = 0;
+
 }
