@@ -3,7 +3,13 @@ package me.hjordan.avaj.utils;
 import me.hjordan.avaj.enums.VehicleType;
 import me.hjordan.avaj.enums.WeatherType;
 import me.hjordan.avaj.objects.Coordinates;
+import me.hjordan.avaj.objects.WeatherProvider;
 import me.hjordan.avaj.objects.aircrafts.Aircraft;
+import me.hjordan.avaj.objects.aircrafts.Flyable;
+import me.hjordan.avaj.objects.towers.impl.WeatherTower;
+
+import static me.hjordan.avaj.utils.Const.MAX_HEIGHT;
+import static me.hjordan.avaj.utils.Const.MIN_HEIGHT;
 
 public class Utils {
 
@@ -13,6 +19,22 @@ public class Utils {
         return ++CURRENT_ID;
     }
 
+    public static void updateConditions(Coordinates coordinates, WeatherTower tower, VehicleType type, Aircraft aircraft) {
+        final WeatherType weatherType = WeatherType.valueOf(
+                WeatherProvider.getProvider().getCurrentWeather(coordinates));
+
+        coordinates = setCoordinates(type, weatherType, aircraft);
+
+        assert coordinates != null;
+        if (coordinates.getHeight() > MAX_HEIGHT)
+            coordinates.setHeight(MAX_HEIGHT);
+        else if (coordinates.getHeight() <= MIN_HEIGHT) {
+            System.out.println(type + "#" + aircraft.getName() + "(" + aircraft.getId() + "): landing.");
+
+            if (aircraft instanceof Flyable)
+                tower.unregister((Flyable) aircraft);
+        }
+    }
 
     public static Coordinates setCoordinates(VehicleType vehicleType,
                                              WeatherType weatherType,
@@ -25,7 +47,7 @@ public class Utils {
 
         switch (weatherType) {
             case SUN -> {
-                printFormattedMessage(type, name, id, "It's sunny. We're having a good day.");
+                printFormattedMessage(type, name, id, "It's sunny. We're having a good day.", weatherType);
                 return switch (vehicleType) {
                     case HELICOPTER, JETPLANE -> new Coordinates(coordinates.getLongitude() + 10,
                             coordinates.getLatitude(),
@@ -36,7 +58,7 @@ public class Utils {
                 };
             }
             case RAIN -> {
-                printFormattedMessage(type, name, id, "It's raining. Better watch out for lightening.");
+                printFormattedMessage(type, name, id, "It's raining. Better watch out for lightening.", weatherType);
                 return switch (vehicleType) {
                     case HELICOPTER -> new Coordinates(coordinates.getLongitude() + 5,
                             coordinates.getLatitude(),
@@ -50,7 +72,7 @@ public class Utils {
                 };
             }
             case FOG -> {
-                printFormattedMessage(type, name, id, "It's foggy. We can't see anything.");
+                printFormattedMessage(type, name, id, "It's foggy. We can't see anything.", weatherType);
                 return switch (vehicleType) {
                     case HELICOPTER, JETPLANE -> new Coordinates(coordinates.getLongitude() + 1,
                             coordinates.getLatitude(),
@@ -61,7 +83,7 @@ public class Utils {
                 };
             }
             case SNOW -> {
-                printFormattedMessage(type, name, id, "It's snowing. We're gonna crash.");
+                printFormattedMessage(type, name, id, "It's snowing. We're gonna crash.", weatherType);
                 return switch (vehicleType) {
                     case HELICOPTER -> new Coordinates(coordinates.getLongitude(),
                             coordinates.getLatitude(),
@@ -78,8 +100,8 @@ public class Utils {
         return null;
     }
 
-    public static void printFormattedMessage(String type, String name, long id, String text) {
-        final String message = type + "#" + name + "(" + id + "): " + text;
+    public static void printFormattedMessage(String type, String name, long id, String text, WeatherType weatherType) {
+        final String message = type + "#" + name + "(" + id + "): " + text + " [" + weatherType + "]";
 
         System.out.println(message);
     }

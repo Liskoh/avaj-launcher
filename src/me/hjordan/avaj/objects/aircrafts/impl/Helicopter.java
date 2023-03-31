@@ -7,6 +7,7 @@ import me.hjordan.avaj.objects.WeatherProvider;
 import me.hjordan.avaj.objects.aircrafts.Aircraft;
 import me.hjordan.avaj.objects.aircrafts.Flyable;
 import me.hjordan.avaj.objects.towers.impl.WeatherTower;
+import me.hjordan.avaj.utils.Utils;
 
 import static me.hjordan.avaj.utils.Utils.*;
 import static me.hjordan.avaj.utils.Const.*;
@@ -20,17 +21,7 @@ public class Helicopter extends Aircraft implements Flyable {
 
     @Override
     public void updateConditions() {
-        final WeatherType weatherType = WeatherType.valueOf(
-                WeatherProvider.getProvider().getCurrentWeather(this.coordinates));
-
-        this.coordinates = setCoordinates(this.type, weatherType, this);
-
-        assert this.coordinates != null;
-        if (this.coordinates.getHeight() > MAX_HEIGHT)
-            this.coordinates.setHeight(MAX_HEIGHT);
-        else if (this.coordinates.getHeight() <= MIN_HEIGHT) {
-            this.tower.unregister(this);
-        }
+        Utils.updateConditions(this.coordinates, this.tower, this.type, this);
     }
 
     @Override

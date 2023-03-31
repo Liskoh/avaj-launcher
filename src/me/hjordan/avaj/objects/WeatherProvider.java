@@ -16,7 +16,7 @@ public class WeatherProvider {
         int random = (coordinates.getLongitude() +
                         coordinates.getLatitude() +
                         coordinates.getHeight()) %
-                weather.length;
+                weather.length - 1;
         return weather[random];
     }
 }

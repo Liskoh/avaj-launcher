@@ -62,4 +62,8 @@ public class SimulationParser {
 
         reader.close();
     }
+
+    public int getSimulationCount() {
+        return this.simulationCount;
+    }
 }

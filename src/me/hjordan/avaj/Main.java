@@ -22,6 +22,11 @@ public class Main {
 
         try {
             parser.parse(TOWER);
+
+            // Run the simulation
+            for (int i = 0; i < parser.getSimulationCount(); i++)
+                TOWER.changeWeather();
+
         } catch (IOException e) {
             System.out.println("Error parsing simulation file: " + e.getMessage());
             System.exit(1);
