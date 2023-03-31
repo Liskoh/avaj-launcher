@@ -9,7 +9,7 @@ Once Java is installed, you can clone this repository to your local machine usin
 
 # bash
 
-    git clone https://github.com/your_username/avaj-launcher.git
+    git clone https://github.com/Liskoh/avaj-launcher.git
 
 # Usage
 
