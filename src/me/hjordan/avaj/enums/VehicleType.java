@@ -1,15 +1,14 @@
 package me.hjordan.avaj.enums;
 
-public enum WeatherType {
+public enum VehicleType {
 
-    RAIN("RAIN"),
-    FOG("FOG"),
-    SUN("SUN"),
-    SNOW("SNOW");
+    HELICOPTER("Helicopter"),
+    JETPLANE("JetPlane"),
+    BALLOON("Balloon");
 
     private final String type;
 
-    WeatherType(String type) {
+    VehicleType(String type) {
         this.type = type;
     }
 
