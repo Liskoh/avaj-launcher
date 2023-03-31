@@ -1,10 +1,14 @@
 package me.hjordan.avaj;
 
+import me.hjordan.avaj.objects.AircraftFactory;
 import me.hjordan.avaj.objects.parser.SimulationParser;
 
 import java.io.IOException;
 
 public class Main {
+
+    private static final AircraftFactory FACTORY = new AircraftFactory();
+
     public static void main(String[] args) {
 
         if (args.length != 1)

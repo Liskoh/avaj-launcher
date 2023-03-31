@@ -13,14 +13,14 @@ public class Tower {
         this.observers = new ArrayList<>();
     }
 
-    protected void register(Flyable flyable) {
+    public void register(Flyable flyable) {
         if (this.observers.contains(flyable))
             throw new RuntimeException("This aircraft is already registered.");
 
         observers.add(flyable);
     }
 
-    protected void unregister(Flyable flyable) {
+    public void unregister(Flyable flyable) {
         if (!this.observers.contains(flyable))
             throw new RuntimeException("This aircraft is not registered.");
 

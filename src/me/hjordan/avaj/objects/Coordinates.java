@@ -2,9 +2,9 @@ package me.hjordan.avaj.objects;
 
 public class Coordinates {
 
-    private final int longitude;
-    private final int latitude;
-    private final int height;
+    private int longitude;
+    private int latitude;
+    private int height;
 
     public Coordinates(int longitude, int latitude, int height) {
         this.longitude = longitude;
@@ -22,5 +22,17 @@ public class Coordinates {
 
     public int getHeight() {
         return this.height;
+    }
+
+    public void setLongitude(int longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(int latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 }
