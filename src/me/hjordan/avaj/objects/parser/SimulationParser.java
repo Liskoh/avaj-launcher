@@ -1,7 +1,6 @@
 package me.hjordan.avaj.objects.parser;
 
-import me.hjordan.avaj.Main;
-import me.hjordan.avaj.objects.aircrafts.Aircraft;
+import me.hjordan.avaj.AvajLauncher;
 import me.hjordan.avaj.objects.aircrafts.Flyable;
 import me.hjordan.avaj.objects.towers.impl.WeatherTower;
 
@@ -52,7 +51,7 @@ public class SimulationParser {
             final int latitude = Integer.parseInt(split[3]);
             final int height = Integer.parseInt(split[4]);
 
-            final Flyable flyable = Main.FACTORY.newAircraft(type, name, longitude, latitude, height);
+            final Flyable flyable = AvajLauncher.FACTORY.newAircraft(type, name, longitude, latitude, height);
 
             if (flyable == null)
                 throw new IllegalArgumentException("Invalid aircraft type: " + type);

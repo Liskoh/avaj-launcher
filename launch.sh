@@ -1,10 +1,9 @@
-#!/bin/sh
-
-# This script is used to launch the application from the command line.
+#!/bin/bash
 
 # Compile the application.
-find . -name "*.java" > sources.txt
-javac -sourcepath . @sources.txt
+find ./src -name "*.java" > sources.txt
+mkdir -p out
+javac -d out @sources.txt
 
 # Launch the application with the scenario file as argument.
-java me.hjordan.avaj.Main scenario.txt
+java -cp out me.hjordan.avaj.AvajLauncher scenario.txt

@@ -6,7 +6,7 @@ import me.hjordan.avaj.objects.towers.impl.WeatherTower;
 
 import java.io.IOException;
 
-public class Main {
+public class AvajLauncher {
 
     public static final AircraftFactory FACTORY = new AircraftFactory();
     private static final WeatherTower TOWER = new WeatherTower();
