@@ -7,12 +7,12 @@ import me.hjordan.avaj.objects.aircrafts.Flyable;
 import me.hjordan.avaj.objects.towers.impl.WeatherTower;
 import me.hjordan.avaj.utils.Utils;
 
-public class Helicopter extends Aircraft implements Flyable {
+public class JetPlane extends Aircraft implements Flyable {
 
-    public Helicopter(long id, String name, Coordinates coordinates) {
+    public JetPlane(long id, String name, Coordinates coordinates) {
         super(id, name, coordinates);
 
-        this.type = VehicleType.HELICOPTER;
+        this.type = VehicleType.JETPLANE;
     }
 
     @Override

@@ -1,7 +1,10 @@
 package me.hjordan.avaj.objects;
 
+import me.hjordan.avaj.enums.VehicleType;
 import me.hjordan.avaj.objects.aircrafts.Flyable;
+import me.hjordan.avaj.objects.aircrafts.impl.Baloon;
 import me.hjordan.avaj.objects.aircrafts.impl.Helicopter;
+import me.hjordan.avaj.objects.aircrafts.impl.JetPlane;
 import me.hjordan.avaj.utils.Utils;
 
 import java.util.List;
@@ -18,12 +21,13 @@ public class AircraftFactory {
 
     public Flyable newAircraft(String type, String name, int longitude, int latitude, int height) {
         Coordinates coordinates = new Coordinates(longitude, latitude, height);
-        switch (type) {
-            case "Helicopter":
-                return new Helicopter(incrementId(), name, coordinates);
-            default:
-                return null;
-        }
+
+        return switch (type) {
+            case "Helicopter" -> new Helicopter(incrementId(), name, coordinates);
+            case "JetPlane" -> new JetPlane(incrementId(), name, coordinates);
+            case "Baloon" -> new Baloon(incrementId(), name, coordinates);
+            default -> null;
+        };
     }
 
     public static AircraftFactory getInstance() {

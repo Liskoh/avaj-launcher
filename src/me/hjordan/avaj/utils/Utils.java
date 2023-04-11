@@ -19,23 +19,6 @@ public class Utils {
         return ++CURRENT_ID;
     }
 
-    public static void updateConditions(Coordinates coordinates, WeatherTower tower, VehicleType type, Aircraft aircraft) {
-        final WeatherType weatherType = WeatherType.valueOf(
-                WeatherProvider.getProvider().getCurrentWeather(coordinates));
-
-        coordinates = setCoordinates(type, weatherType, aircraft);
-
-        assert coordinates != null;
-        if (coordinates.getHeight() > MAX_HEIGHT)
-            coordinates.setHeight(MAX_HEIGHT);
-        else if (coordinates.getHeight() <= MIN_HEIGHT) {
-            System.out.println(type + "#" + aircraft.getName() + "(" + aircraft.getId() + "): landing.");
-
-            if (aircraft instanceof Flyable)
-                tower.unregister((Flyable) aircraft);
-        }
-    }
-
     public static Coordinates setCoordinates(VehicleType vehicleType,
                                              WeatherType weatherType,
                                              Aircraft aircraft) {
