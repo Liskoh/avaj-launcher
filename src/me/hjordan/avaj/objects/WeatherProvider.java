@@ -13,10 +13,17 @@ public class WeatherProvider {
     }
 
     public String getCurrentWeather(Coordinates coordinates) {
-        int random = (coordinates.getLongitude() +
-                        coordinates.getLatitude() +
-                        coordinates.getHeight()) %
-                weather.length - 1;
+//        int coord = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();
+//        int random = (coordinates.getLongitude() +
+//                        coordinates.getLatitude() +
+//                        coordinates.getHeight()) %
+//                weather.length;
+//
+//        System.err.println("Coordinates: " + coord);
+//        System.err.println("Weather: " + random);
+
+        final int random = (int) (Math.random() * 4);
+
         return weather[random];
     }
 }

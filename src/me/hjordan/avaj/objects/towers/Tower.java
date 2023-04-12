@@ -21,7 +21,6 @@ public class Tower {
             throw new RuntimeException("This aircraft is already registered.");
 
 
-
         if (this instanceof WeatherTower && flyable instanceof Aircraft aircraft) {
             observers.add(flyable);
             flyable.registerTower((WeatherTower) this);
@@ -44,6 +43,9 @@ public class Tower {
     }
 
     protected void conditionsChanged() {
-            this.observers.forEach(Flyable::updateConditions);
+        for (int i = 0; i < this.observers.size(); i++) {
+            Flyable flyable = this.observers.get(i);
+            flyable.updateConditions();
+        }
     }
 }
