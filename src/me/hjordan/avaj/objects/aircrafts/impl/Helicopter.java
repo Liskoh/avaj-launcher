@@ -7,7 +7,7 @@ import me.hjordan.avaj.objects.aircrafts.Flyable;
 import me.hjordan.avaj.objects.towers.impl.WeatherTower;
 import me.hjordan.avaj.utils.Utils;
 
-public class Helicopter extends Aircraft implements Flyable {
+public class Helicopter extends Aircraft {
 
     public Helicopter(long id, String name, Coordinates coordinates) {
         super(id, name, coordinates);
@@ -18,10 +18,5 @@ public class Helicopter extends Aircraft implements Flyable {
     @Override
     public void updateConditions() {
         this.update();
-    }
-
-    @Override
-    public void registerTower(WeatherTower tower) {
-        this.tower = tower;
     }
 }

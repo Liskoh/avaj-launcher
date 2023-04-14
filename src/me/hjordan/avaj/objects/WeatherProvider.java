@@ -1,11 +1,18 @@
 package me.hjordan.avaj.objects;
 
+import me.hjordan.avaj.enums.WeatherType;
+import me.hjordan.avaj.utils.Const;
+
 public class WeatherProvider {
 
     private static final WeatherProvider PROVIDER = new WeatherProvider();
-    private final String[] weather = {"RAIN", "FOG", "SUN", "SNOW"};
+    private final String[] weather;
 
     private WeatherProvider() {
+        this.weather = new String[Const.WEATHER_COUNT];
+
+        for (int i = 0; i < Const.WEATHER_COUNT; i++)
+            this.weather[i] = WeatherType.values()[i].getType();
     }
 
     public static WeatherProvider getProvider() {
@@ -13,16 +20,8 @@ public class WeatherProvider {
     }
 
     public String getCurrentWeather(Coordinates coordinates) {
-//        int coord = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();
-//        int random = (coordinates.getLongitude() +
-//                        coordinates.getLatitude() +
-//                        coordinates.getHeight()) %
-//                weather.length;
-//
-//        System.err.println("Coordinates: " + coord);
-//        System.err.println("Weather: " + random);
-
-        final int random = (int) (Math.random() * 4);
+        final int coord = coordinates.getLongitude() + coordinates.getLatitude() + coordinates.getHeight();
+        final int random = coord % Const.WEATHER_COUNT;
 
         return weather[random];
     }

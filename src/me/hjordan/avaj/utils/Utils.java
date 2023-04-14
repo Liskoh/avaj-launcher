@@ -35,7 +35,7 @@ public class Utils {
                     case HELICOPTER, JETPLANE -> new Coordinates(coordinates.getLongitude() + 10,
                             coordinates.getLatitude(),
                             coordinates.getHeight() + 2);
-                    case BALLOON -> new Coordinates(coordinates.getLongitude(),
+                    case BALLOON -> new Coordinates(coordinates.getLongitude() + 2,
                             coordinates.getLatitude(),
                             coordinates.getHeight() + 4);
                 };
@@ -46,8 +46,8 @@ public class Utils {
                     case HELICOPTER -> new Coordinates(coordinates.getLongitude() + 5,
                             coordinates.getLatitude(),
                             coordinates.getHeight());
-                    case JETPLANE -> new Coordinates(coordinates.getLongitude() + 7,
-                            coordinates.getLatitude(),
+                    case JETPLANE -> new Coordinates(coordinates.getLongitude(),
+                            coordinates.getLatitude() + 5,
                             coordinates.getHeight());
                     case BALLOON -> new Coordinates(coordinates.getLongitude(),
                             coordinates.getLatitude(),
@@ -57,8 +57,11 @@ public class Utils {
             case FOG -> {
                 printFormattedMessage(type, name, id, "It's foggy. We can't see anything.", weatherType);
                 return switch (vehicleType) {
-                    case HELICOPTER, JETPLANE -> new Coordinates(coordinates.getLongitude() + 1,
+                    case HELICOPTER -> new Coordinates(coordinates.getLongitude() + 1,
                             coordinates.getLatitude(),
+                            coordinates.getHeight());
+                    case JETPLANE -> new Coordinates(coordinates.getLongitude(),
+                            coordinates.getLatitude() + 1,
                             coordinates.getHeight());
                     case BALLOON -> new Coordinates(coordinates.getLongitude(),
                             coordinates.getLatitude(),

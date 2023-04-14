@@ -10,7 +10,7 @@ import me.hjordan.avaj.utils.Utils;
 import static me.hjordan.avaj.utils.Const.MAX_HEIGHT;
 import static me.hjordan.avaj.utils.Const.MIN_HEIGHT;
 
-public class Aircraft {
+public class Aircraft extends Flyable{
 
     protected long id;
     protected String name;
@@ -26,6 +26,14 @@ public class Aircraft {
         this.tower = null;
     }
 
+    @Override
+    public void updateConditions() {}
+
+    @Override
+    public void registerTower(WeatherTower tower) {
+        this.tower = tower;
+    }
+
     protected void update() {
         final WeatherType weatherType = WeatherType.valueOf(
                 WeatherProvider.getProvider().getCurrentWeather(this.coordinates));
@@ -38,8 +46,7 @@ public class Aircraft {
         else if (this.coordinates.getHeight() <= MIN_HEIGHT) {
             System.out.println(type + "#" + this.getName() + "(" + this.getId() + "): landing.");
 
-            if (this instanceof Flyable)
-                tower.unregister((Flyable) this);
+            tower.unregister((Flyable) this);
         }
     }
 
