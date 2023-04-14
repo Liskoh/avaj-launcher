@@ -1,6 +1,7 @@
 package me.hjordan.avaj;
 
 import me.hjordan.avaj.objects.AircraftFactory;
+import me.hjordan.avaj.objects.exceptions.ParsingException;
 import me.hjordan.avaj.objects.parser.SimulationParser;
 import me.hjordan.avaj.objects.towers.impl.WeatherTower;
 
@@ -27,9 +28,11 @@ public class AvajLauncher {
             for (int i = 0; i < parser.getSimulationCount(); i++)
                 TOWER.changeWeather();
 
-        } catch (IOException e) {
-            System.out.println("Error parsing simulation file: " + e.getMessage());
-            System.exit(1);
+        } catch (IOException ioException) {
+            if (ioException instanceof ParsingException parsingException)
+                parsingException.exit();
+
+            System.out.println("Error parsing simulation file: " + ioException.getMessage());
         }
     }
 }

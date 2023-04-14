@@ -2,9 +2,12 @@ package me.hjordan.avaj.objects.parser;
 
 import me.hjordan.avaj.AvajLauncher;
 import me.hjordan.avaj.objects.aircrafts.Flyable;
+import me.hjordan.avaj.objects.exceptions.ParsingException;
 import me.hjordan.avaj.objects.towers.impl.WeatherTower;
 
+import javax.swing.text.ParagraphView;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,8 +27,8 @@ public class SimulationParser {
         this.lines = new ArrayList<>();
     }
 
-    public void parse(WeatherTower tower) throws IOException, NumberFormatException {
-        BufferedReader reader = new BufferedReader(new FileReader(this.simulationPath));
+    public void parse(WeatherTower tower) throws IOException {
+        final BufferedReader reader = new BufferedReader(new FileReader(this.simulationPath));
         String line = null;
 
         for (int count = 0; (line = reader.readLine()) != null; count++) {
@@ -33,7 +36,7 @@ public class SimulationParser {
                 this.simulationCount = Integer.parseInt(line);
 
                 if (this.simulationCount < MIN_SIMULATION_AMOUNT)
-                    throw new NumberFormatException("Invalid simulation count: " + this.simulationCount);
+                    throw new ParsingException("Invalid simulation count: " + this.simulationCount);
                 continue;
             }
             this.lines.add(line);

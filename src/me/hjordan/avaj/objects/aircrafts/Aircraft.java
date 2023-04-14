@@ -28,14 +28,14 @@ public class Aircraft {
 
     protected void update() {
         final WeatherType weatherType = WeatherType.valueOf(
-                WeatherProvider.getProvider().getCurrentWeather(coordinates));
+                WeatherProvider.getProvider().getCurrentWeather(this.coordinates));
 
-        coordinates = Utils.setCoordinates(type, weatherType, this);
+        this.coordinates = Utils.setCoordinates(type, weatherType, this);
 
         assert coordinates != null;
-        if (coordinates.getHeight() > MAX_HEIGHT)
+        if (this.coordinates.getHeight() > MAX_HEIGHT)
             coordinates.setHeight(MAX_HEIGHT);
-        else if (coordinates.getHeight() <= MIN_HEIGHT) {
+        else if (this.coordinates.getHeight() <= MIN_HEIGHT) {
             System.out.println(type + "#" + this.getName() + "(" + this.getId() + "): landing.");
 
             if (this instanceof Flyable)
