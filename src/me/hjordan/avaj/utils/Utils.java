@@ -32,54 +32,32 @@ public class Utils {
             case SUN -> {
                 printFormattedMessage(type, name, id, "It's sunny. We're having a good day.", weatherType);
                 return switch (vehicleType) {
-                    case HELICOPTER, JETPLANE -> new Coordinates(coordinates.getLongitude() + 10,
-                            coordinates.getLatitude(),
-                            coordinates.getHeight() + 2);
-                    case BALLOON -> new Coordinates(coordinates.getLongitude() + 2,
-                            coordinates.getLatitude(),
-                            coordinates.getHeight() + 4);
+                    case HELICOPTER, JETPLANE -> coordinates.updateCoordinates(10, 0, 2);
+                    case BALLOON -> coordinates.updateCoordinates(2, 0, 4);
                 };
             }
             case RAIN -> {
                 printFormattedMessage(type, name, id, "It's raining. Better watch out for lightening.", weatherType);
                 return switch (vehicleType) {
-                    case HELICOPTER -> new Coordinates(coordinates.getLongitude() + 5,
-                            coordinates.getLatitude(),
-                            coordinates.getHeight());
-                    case JETPLANE -> new Coordinates(coordinates.getLongitude(),
-                            coordinates.getLatitude() + 5,
-                            coordinates.getHeight());
-                    case BALLOON -> new Coordinates(coordinates.getLongitude(),
-                            coordinates.getLatitude(),
-                            coordinates.getHeight() - 5);
+                    case HELICOPTER -> coordinates.updateCoordinates(5, 0, 0);
+                    case JETPLANE -> coordinates.updateCoordinates(0, 5, 0);
+                    case BALLOON -> coordinates.updateCoordinates(0, 0, -5);
                 };
             }
             case FOG -> {
                 printFormattedMessage(type, name, id, "It's foggy. We can't see anything.", weatherType);
                 return switch (vehicleType) {
-                    case HELICOPTER -> new Coordinates(coordinates.getLongitude() + 1,
-                            coordinates.getLatitude(),
-                            coordinates.getHeight());
-                    case JETPLANE -> new Coordinates(coordinates.getLongitude(),
-                            coordinates.getLatitude() + 1,
-                            coordinates.getHeight());
-                    case BALLOON -> new Coordinates(coordinates.getLongitude(),
-                            coordinates.getLatitude(),
-                            coordinates.getHeight() - 3);
+                    case HELICOPTER -> coordinates.updateCoordinates(1, 0, 0);
+                    case JETPLANE -> coordinates.updateCoordinates(0, 1, 0);
+                    case BALLOON -> coordinates.updateCoordinates(0, 0, -3);
                 };
             }
             case SNOW -> {
                 printFormattedMessage(type, name, id, "It's snowing. We're gonna crash.", weatherType);
                 return switch (vehicleType) {
-                    case HELICOPTER -> new Coordinates(coordinates.getLongitude(),
-                            coordinates.getLatitude(),
-                            coordinates.getHeight() - 12);
-                    case JETPLANE -> new Coordinates(coordinates.getLongitude(),
-                            coordinates.getLatitude(),
-                            coordinates.getHeight() - 7);
-                    case BALLOON -> new Coordinates(coordinates.getLongitude(),
-                            coordinates.getLatitude(),
-                            coordinates.getHeight() - 15);
+                    case HELICOPTER -> coordinates.updateCoordinates(0, 0, -12);
+                    case JETPLANE -> coordinates.updateCoordinates(0, 0, -7);
+                    case BALLOON -> coordinates.updateCoordinates(0, 0, -15);
                 };
             }
         }
