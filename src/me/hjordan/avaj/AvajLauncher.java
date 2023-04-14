@@ -28,11 +28,11 @@ public class AvajLauncher {
             for (int i = 0; i < parser.getSimulationCount(); i++)
                 TOWER.changeWeather();
 
-        } catch (IOException ioException) {
-            if (ioException instanceof ParsingException parsingException)
+        } catch (Exception ex) {
+            if (ex instanceof ParsingException parsingException)
                 parsingException.exit();
 
-            System.out.println("Error parsing simulation file: " + ioException.getMessage());
+            System.out.println("Error parsing simulation file: " + ex.getMessage());
         }
     }
 }

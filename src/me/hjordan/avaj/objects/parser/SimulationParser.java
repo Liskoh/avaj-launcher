@@ -27,7 +27,7 @@ public class SimulationParser {
         this.lines = new ArrayList<>();
     }
 
-    public void parse(WeatherTower tower) throws IOException {
+    public void parse(WeatherTower tower) throws Exception {
         final BufferedReader reader = new BufferedReader(new FileReader(this.simulationPath));
         String line = null;
 
